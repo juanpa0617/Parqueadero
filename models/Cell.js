@@ -7,7 +7,10 @@ const cellSchema = new mongoose.Schema({
   fechaIngreso: { type: Date },
   fechaSalida: { type: Date },
   pin: { type: String }
-});
+},
+  { timestamps: true },
+  { versionKey: false }
+);
 
 const Cell = mongoose.model('Cell', cellSchema);
 

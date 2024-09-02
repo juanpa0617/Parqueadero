@@ -6,14 +6,13 @@ export const createCell = async (req, res) => {
   try {
     const { numeroCelda, placaVehiculo } = req.body;
 
+    
     if (!numeroCelda) {
       return res.status(400).json({ error: 'El número de celda es requerido' });
     }
 
-    // Crear una nueva instancia del modelo Cell
     const cell = new Cell({ numeroCelda, placaVehiculo, estado: 'disponible' });
 
-    // Concatenar el número de celda con la placa del vehículo
     const pinString = `${numeroCelda}${placaVehiculo || ''}`;
 
     // Generar un hash encriptado para el PIN
@@ -88,7 +87,6 @@ export const deleteCell = async (req, res) => {
   }
 };
 
-// Método para parquear un vehículo en una celda
 // Método para parquear un vehículo en una celda
 export const parkVehicle = async (req, res) => {
   try {
