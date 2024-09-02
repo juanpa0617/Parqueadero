@@ -1,5 +1,5 @@
 import Cell from '../models/Cell.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 // Crear una nueva celda
 export const createCell = async (req, res) => {
