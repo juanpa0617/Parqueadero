@@ -1,17 +1,17 @@
 import Cell from '../models/Cell.js';
 import bcrypt from 'bcryptjs';
 
+
+
 // Crear una nueva celda
 export const createCell = async (req, res) => {
   try {
-    const { numeroCelda, placaVehiculo } = req.body;
+    const { placaVehiculo } = req.body;
 
-    
-    if (!numeroCelda) {
-      return res.status(400).json({ error: 'El número de celda es requerido' });
-    }
+    // Obtener el siguiente número de celda
+    const numeroCelda = await Cell.getNextNumeroCelda();
 
-    const cell = new Cell({ numeroCelda, placaVehiculo, estado: 'disponible' });
+    const cell = new Cell({ numeroCelda, placaVehiculo: placaVehiculo || null, estado: 'disponible' });
 
     const pinString = `${numeroCelda}${placaVehiculo || ''}`;
 
@@ -27,6 +27,7 @@ export const createCell = async (req, res) => {
     res.status(500).json({ error: 'Error al crear la celda' });
   }
 };
+
 
 // Obtener una celda específica por ID
 export const getCell = async (req, res) => {

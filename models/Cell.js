@@ -12,6 +12,13 @@ const cellSchema = new mongoose.Schema({
   { versionKey: false }
 );
 
+// Método estático para obtener el siguiente número de celda
+cellSchema.statics.getNextNumeroCelda = async function() {
+  const lastCell = await this.findOne().sort({ numeroCelda: -1 });
+  return lastCell ? lastCell.numeroCelda + 1 : 1;
+};
+
+// Crear el modelo
 const Cell = mongoose.model('Cell', cellSchema);
 
 export default Cell;
